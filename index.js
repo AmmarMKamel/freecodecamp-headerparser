@@ -24,10 +24,23 @@ app.get("/api/hello", function (req, res) {
 	res.json({ greeting: "hello API" });
 });
 
+/**
+ * Responds to requests sent to "/api/whoami" with a JSON object containing the client's IP address,
+ * preferred language and user agent (software info).
+ *
+ * Sets the response status to 200.
+ *
+ * @param {object} req - The request object, containing the client's details.
+ * @param {object} res - The response object, used to end the request.
+ */
 app.get("/api/whoami", (req, res) => {
+	// Set the response status to 200
 	res.status(200).json({
+		// Get the IP address from the request
 		ipaddress: req.socket.remoteAddress,
+		// Get the language from the request header
 		language: req.headers["accept-language"],
+		// Get the software (user agent) from the request header
 		software: req.headers["user-agent"],
 	});
 });
